@@ -4,7 +4,6 @@ import com.purnaprasanth.recipes.base.creational.BaseGenerator
 import com.purnaprasanth.recipes.base.creational.single
 import com.purnaprasanth.recipes.data.datasources.recipe.ContentFulDataSource
 import com.purnaprasanth.recipes.data.datasources.recipe.IRecipeDataSource
-import com.purnaprasanth.recipes.data.mappers.ContentFulRecipeToRecipe
 import com.purnaprasanth.recipes.data.repo.RecipeRepo
 
 /**
@@ -17,7 +16,7 @@ object RepoInstances {
         ContentFulDataSource(
             NetworkInstances.contentfulServices.recipeServices,
             NetworkInstances.networkCallRunner,
-            ContentFulRecipeToRecipe
+            MapperInstances.contentFulRecipeToRecipeMapper
         )
     }
 

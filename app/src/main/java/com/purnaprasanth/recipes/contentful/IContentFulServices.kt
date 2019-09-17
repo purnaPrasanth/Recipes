@@ -1,5 +1,6 @@
 package com.purnaprasanth.recipes.contentful
 
+import com.purnaprasanth.recipes.contentful.dataservices.IAssetServices
 import com.purnaprasanth.recipes.contentful.dataservices.IRecipeServices
 
 /**
@@ -7,4 +8,6 @@ import com.purnaprasanth.recipes.contentful.dataservices.IRecipeServices
  **/
 interface IContentFulServices {
     val recipeServices: IRecipeServices
+
+    val assetServices: IAssetServices
 }

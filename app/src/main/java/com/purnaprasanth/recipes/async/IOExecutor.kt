@@ -5,6 +5,8 @@ import java.util.concurrent.Executor
 import java.util.concurrent.SynchronousQueue
 import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Created by Purna on 2019-09-16 as a part of Recipes
@@ -14,6 +16,7 @@ import java.util.concurrent.TimeUnit
  * Executor for IO Operational tasks
  */
 
+@Singleton
 class IOExecutor : AppExecutor {
     override val executor: Executor
         get() = _executor
