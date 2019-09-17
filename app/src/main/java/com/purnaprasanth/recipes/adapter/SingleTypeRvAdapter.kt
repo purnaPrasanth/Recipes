@@ -63,6 +63,10 @@ abstract class SingleTypeBaseRvAdapter<BINDING : ViewDataBinding, DATA>(
         }
     }
 
+    public override fun getItem(position: Int): DATA {
+        return super.getItem(position)
+    }
+
     /**
      * to bind data to the view [binding]
      */

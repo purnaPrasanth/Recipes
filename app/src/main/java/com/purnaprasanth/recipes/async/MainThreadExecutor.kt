@@ -3,6 +3,8 @@ package com.purnaprasanth.recipes.async
 import android.os.Handler
 import android.os.Looper
 import java.util.concurrent.Executor
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Created by Purna on 2019-09-16 as a part of Recipes
@@ -12,7 +14,8 @@ import java.util.concurrent.Executor
  * Executor for Main Thread Tasks
  */
 
-class MainThreadExecutor : AppExecutor {
+@Singleton
+class MainThreadExecutor @Inject constructor() : AppExecutor {
     override val executor: Executor
         get() = _executor
 

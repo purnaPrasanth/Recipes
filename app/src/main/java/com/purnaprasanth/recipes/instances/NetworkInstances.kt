@@ -1,8 +1,11 @@
 package com.purnaprasanth.recipes.instances
 
+import coil.ImageLoader
 import com.facebook.stetho.okhttp3.StethoInterceptor
+import com.purnaprasanth.recipes.RecipeApplication
 import com.purnaprasanth.recipes.base.creational.BaseGenerator
 import com.purnaprasanth.recipes.base.creational.single
+import com.purnaprasanth.recipes.contentful.CoilImageLoader
 import com.purnaprasanth.recipes.contentful.IContentFulServices
 import com.purnaprasanth.recipes.contentful.OkhttpContentfulServices
 import com.purnaprasanth.recipes.data.NetworkCallRunner
@@ -35,6 +38,10 @@ object NetworkInstances {
         NetworkCallRunner()
     }
 
+    private val contentFulCoilImageLoaderGenerator: BaseGenerator<CoilImageLoader> = single {
+        CoilImageLoader(RecipeApplication.applicationContext, okHttpClient)
+    }
+
     val okHttpClient: OkHttpClient
         get() = okHttpGenerator.getInstance()
 
@@ -43,5 +50,8 @@ object NetworkInstances {
 
     val networkCallRunner: NetworkCallRunner
         get() = networkRunnerGenerator.getInstance()
+
+    val contentfulCoilImageLoader: ImageLoader
+        get() = contentFulCoilImageLoaderGenerator.getInstance().coilImageLoader
 
 }

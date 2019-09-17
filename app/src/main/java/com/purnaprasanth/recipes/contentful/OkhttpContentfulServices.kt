@@ -1,6 +1,6 @@
 package com.purnaprasanth.recipes.contentful
 
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.purnaprasanth.recipes.contentful.dataservices.IAssetServices
 import com.purnaprasanth.recipes.contentful.dataservices.IRecipeServices
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -27,5 +27,9 @@ class OkhttpContentfulServices(
 
     override val recipeServices: IRecipeServices by lazy {
         retrofit.create(IRecipeServices::class.java)
+    }
+
+    override val assetServices: IAssetServices by lazy {
+        retrofit.create(IAssetServices::class.java)
     }
 }
