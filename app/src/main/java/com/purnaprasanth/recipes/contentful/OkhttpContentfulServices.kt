@@ -1,6 +1,5 @@
 package com.purnaprasanth.recipes.contentful
 
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.purnaprasanth.recipes.contentful.dataservices.IRecipeServices
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
