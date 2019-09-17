@@ -2,6 +2,7 @@ package com.purnaprasanth.recipes.async
 
 import android.os.AsyncTask
 import java.util.concurrent.Executor
+import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
@@ -13,7 +14,7 @@ import javax.inject.Singleton
  */
 
 @Singleton
-class CommonExecutor : AppExecutor {
+class CommonExecutor @Inject constructor() : AppExecutor {
     override val executor: Executor
         get() = AsyncTask.THREAD_POOL_EXECUTOR
 }

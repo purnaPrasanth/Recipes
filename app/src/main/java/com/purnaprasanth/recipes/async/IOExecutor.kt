@@ -17,7 +17,7 @@ import javax.inject.Singleton
  */
 
 @Singleton
-class IOExecutor : AppExecutor {
+class IOExecutor @Inject constructor() : AppExecutor {
     override val executor: Executor
         get() = _executor
 

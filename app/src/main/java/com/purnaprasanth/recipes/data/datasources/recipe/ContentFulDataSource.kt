@@ -8,6 +8,8 @@ import com.purnaprasanth.recipes.data.NetworkCallRunner
 import com.purnaprasanth.recipes.data.NetworkResult
 import com.purnaprasanth.recipes.data.model.RecipeListItem
 import com.purnaprasanth.recipes.data.toListMapper
+import javax.inject.Inject
+import javax.inject.Named
 import javax.inject.Singleton
 
 /**
@@ -15,10 +17,10 @@ import javax.inject.Singleton
  **/
 
 @Singleton
-class ContentFulDataSource(
+class ContentFulDataSource @Inject constructor(
     private val recipeServices: IRecipeServices,
     private val networkCallRunner: NetworkCallRunner,
-    private val recipeListMapper: Mapper<EntryResource<Recipe>, RecipeListItem>
+    @Named(value = "contentRecipeResToRecipeMapper") private val recipeListMapper: Mapper<EntryResource<Recipe>, RecipeListItem>
 ) : IRecipeDataSource {
     override suspend fun getListOfRecipes(): NetworkResult<List<RecipeListItem>> {
         return networkCallRunner.executeForResponse(

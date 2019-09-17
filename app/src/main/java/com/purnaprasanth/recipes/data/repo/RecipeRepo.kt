@@ -3,6 +3,7 @@ package com.purnaprasanth.recipes.data.repo
 import com.purnaprasanth.recipes.data.NetworkResult
 import com.purnaprasanth.recipes.data.datasources.recipe.IRecipeDataSource
 import com.purnaprasanth.recipes.data.model.RecipeListItem
+import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
@@ -10,7 +11,7 @@ import javax.inject.Singleton
  **/
 
 @Singleton
-class RecipeRepo(
+class RecipeRepo @Inject constructor(
     private val contentfulIRecipeDataSource: IRecipeDataSource
 ) {
     suspend fun getRecipes(): NetworkResult<List<RecipeListItem>> {

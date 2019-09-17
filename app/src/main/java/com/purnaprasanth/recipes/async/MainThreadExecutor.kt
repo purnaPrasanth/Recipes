@@ -3,6 +3,7 @@ package com.purnaprasanth.recipes.async
 import android.os.Handler
 import android.os.Looper
 import java.util.concurrent.Executor
+import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
@@ -14,7 +15,7 @@ import javax.inject.Singleton
  */
 
 @Singleton
-class MainThreadExecutor : AppExecutor {
+class MainThreadExecutor @Inject constructor() : AppExecutor {
     override val executor: Executor
         get() = _executor
 

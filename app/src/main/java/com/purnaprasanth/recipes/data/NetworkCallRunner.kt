@@ -1,5 +1,6 @@
 package com.purnaprasanth.recipes.data
 
+import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
@@ -13,7 +14,7 @@ import javax.inject.Singleton
  */
 
 @Singleton
-class NetworkCallRunner {
+class NetworkCallRunner @Inject constructor() {
 
     /**
      * Handy Method to execute Network Instructions
