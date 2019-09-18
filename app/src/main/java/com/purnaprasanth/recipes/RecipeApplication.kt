@@ -10,7 +10,6 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
-
 /**
  * Created by Purna on 2019-09-16 as a part of Recipes
  **/

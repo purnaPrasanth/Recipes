@@ -1,10 +1,10 @@
 package com.purnaprasanth.recipes.di
 
 import com.facebook.stetho.okhttp3.StethoInterceptor
-import com.purnaprasanth.recipes.ContentFul
 import com.purnaprasanth.recipes.IO
-import com.purnaprasanth.recipes.contentful.CoilImageLoader
 import com.purnaprasanth.recipes.contentful.IContentFulServices
+import com.purnaprasanth.recipes.contentful.dataservices.IAssetServices
+import com.purnaprasanth.recipes.contentful.dataservices.IRecipeServices
 import dagger.Module
 import dagger.Provides
 import okhttp3.Dispatcher
@@ -31,13 +31,11 @@ class NetworkModule {
         .build()
 
     @Provides
-    fun provideContentFulRecipeServices(contentFulServices: IContentFulServices) = contentFulServices.recipeServices
+    fun provideContentFulRecipeServices(contentFulServices: IContentFulServices): IRecipeServices =
+        contentFulServices.recipeServices
 
     @Provides
-    fun provideContentFulAssetServices(contentFulServices: IContentFulServices) = contentFulServices.assetServices
-
-    @Provides
-    @ContentFul
-    fun provideContentFulImageLoader(contentfulImageLoader: CoilImageLoader) = contentfulImageLoader.coilImageLoader
+    fun provideContentFulAssetServices(contentFulServices: IContentFulServices): IAssetServices =
+        contentFulServices.assetServices
 
 }

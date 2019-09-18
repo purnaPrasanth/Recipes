@@ -72,6 +72,8 @@
     <dimen name="f40">40sp</dimen>
     <dimen name="f44">44sp</dimen>
 
+    <dimen name="dividerHeight">@dimen/p2</dimen>
+
     <dimen name="textSizeTiny">@dimen/f10</dimen>
     <dimen name="textSizeSmall">@dimen/f14</dimen>
     <dimen name="textSize">@dimen/f16</dimen>

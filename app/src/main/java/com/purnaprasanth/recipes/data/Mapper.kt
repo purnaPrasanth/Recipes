@@ -25,6 +25,19 @@ private class MapperToListMapper<F, T>(val singleMapper: Mapper<F, T>) : Mapper<
     override suspend fun map(from: List<F>): List<T> = from.map { singleMapper.map(it) }
 }
 
+// TODO() implement async processing for each item
+/**
+ * Base Mapper for a list of items of one type to a different type with Async Processing for each item
+ *
+ * @param F The type of the input data
+ * @param T the type of the data to be returned
+ */
+private class MapperToAsyncListMapper<F, T>(val singleMapper: Mapper<F, T>) : Mapper<List<F>, List<T>> {
+    override suspend fun map(from: List<F>): List<T> = from.map {
+        singleMapper.map(it)
+    }
+}
+
 class SelfMapper<T> : Mapper<T, T> {
     override suspend fun map(from: T) = from
 }
@@ -33,3 +46,8 @@ class SelfMapper<T> : Mapper<T, T> {
  * Handy Entension for converting [Mapper] to [MapperToListMapper]
  */
 fun <F, T> Mapper<F, T>.toListMapper(): Mapper<List<F>, List<T>> = MapperToListMapper(this)
+
+/**
+ * Handy Entension for converting [Mapper] to [MapperToAsyncListMapper]
+ */
+fun <F, T> Mapper<F, T>.toAsyncListMapper(): Mapper<List<F>, List<T>> = MapperToAsyncListMapper(this)

@@ -13,5 +13,6 @@
     <color name="windowBackground">@color/bg_grey</color>
     <color name="textColorPrimary">@color/slate</color>
     <color name="textColorSecondary">@color/cloudy_blue</color>
+    <color name="dividerColor">@color/slate</color>
 
 </resources>

@@ -1,15 +1,17 @@
 package com.purnaprasanth.recipes.main
 
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import coil.ImageLoader
+import com.purnaprasanth.recipes.ContentFul
 import com.purnaprasanth.recipes.R
 import com.purnaprasanth.recipes.baseandroid.BaseActivity
 import com.purnaprasanth.recipes.data.repo.RecipeRepo
 import com.purnaprasanth.recipes.databinding.ActivityMainBinding
+import com.purnaprasanth.recipes.recipedetail.RecipeDetailActivity
 import javax.inject.Inject
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main),
@@ -34,11 +36,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main),
         recipeAdapter.onItemClickListener = this
         viewModel.recipeList.observe(this, Observer {
             recipeAdapter.submitList(it)
-            Log.d("MainActivity", it.toString())
         })
     }
 
     override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
         val clickedItem = recipeAdapter.getItem(p2)
+        startActivity(RecipeDetailActivity.getIntent(this, clickedItem.id))
     }
 }

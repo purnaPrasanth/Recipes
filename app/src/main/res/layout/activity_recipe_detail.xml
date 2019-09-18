@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable name="recipeDetailVM"
+                  type="com.purnaprasanth.recipes.recipedetail.RecipeDetailVM"/>
+
+        <variable name="recipeDetail"
+                  type="androidx.lifecycle.LiveData&lt;com.purnaprasanth.recipes.data.model.RecipeDetails&gt;"/>
+
+        <import type="android.view.View"/>
+
+    </data>
+
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:context=".recipedetail.RecipeDetailActivity"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:padding="@dimen/parent_padding">
+
+            <ImageView android:layout_width="0dp"
+                       android:layout_height="0dp"
+                       android:id="@+id/recipe_image"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintEnd_toEndOf="parent"
+                       app:layout_constraintTop_toTopOf="parent"
+                       app:layout_constraintDimensionRatio="H, 3:2"
+                       android:elevation="@dimen/elevation"/>
+
+            <com.purnaprasanth.recipes.views.TextWithHeadingView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recipe_title"
+                    app:title='@{"Title"}'
+                    app:content="@{recipeDetail.title}"
+                    android:visibility="@{recipeDetail.title == null || recipeDetail.title.isEmpty() ? View.GONE : View.VISIBLE, default = gone}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/recipe_image"
+                    android:layout_marginTop="@dimen/parent_padding"/>
+
+            <com.purnaprasanth.recipes.views.TextWithHeadingView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recipe_description"
+                    app:title='@{"Description"}'
+                    app:content="@{recipeDetail.description}"
+                    android:visibility="@{recipeDetail.description == null || recipeDetail.description.isEmpty() ? View.GONE : View.VISIBLE, default = gone}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/recipe_title"
+                    android:layout_marginTop="@dimen/parent_padding"/>
+
+            <com.purnaprasanth.recipes.views.TextWithHeadingView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:title='@{"Tags"}'
+                    android:id="@+id/recipe_tags"
+                    android:visibility="@{recipeDetail.tags == null ? View.GONE : View.VISIBLE, default = gone}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/recipe_description"
+                    android:layout_marginTop="@dimen/parent_padding"/>
+
+            <com.purnaprasanth.recipes.views.TextWithHeadingView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:title='@{"Chef"}'
+                    android:id="@+id/recipe_chef"
+                    app:content="@{recipeDetail.chefName}"
+                    android:visibility="@{recipeDetail.chefName == null ? View.GONE : View.VISIBLE, default = gone}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/recipe_tags"
+                    android:layout_marginTop="@dimen/parent_padding"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

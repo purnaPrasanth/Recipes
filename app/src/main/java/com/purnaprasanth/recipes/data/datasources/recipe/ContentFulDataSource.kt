@@ -6,10 +6,10 @@ import com.purnaprasanth.recipes.contentful.dataservices.IRecipeServices
 import com.purnaprasanth.recipes.data.Mapper
 import com.purnaprasanth.recipes.data.NetworkCallRunner
 import com.purnaprasanth.recipes.data.NetworkResult
+import com.purnaprasanth.recipes.data.model.RecipeDetails
 import com.purnaprasanth.recipes.data.model.RecipeListItem
-import com.purnaprasanth.recipes.data.toListMapper
+import com.purnaprasanth.recipes.data.toAsyncListMapper
 import javax.inject.Inject
-import javax.inject.Named
 import javax.inject.Singleton
 
 /**
@@ -20,11 +20,18 @@ import javax.inject.Singleton
 class ContentFulDataSource @Inject constructor(
     private val recipeServices: IRecipeServices,
     private val networkCallRunner: NetworkCallRunner,
-    private val recipeListMapper: Mapper<EntryResource<Recipe>, RecipeListItem>
+    private val recipeListMapper: Mapper<EntryResource<Recipe>, RecipeListItem>,
+    private val recipeDetailMapper: Mapper<EntryResource<Recipe>, RecipeDetails>
 ) : IRecipeDataSource {
     override suspend fun getListOfRecipes(): NetworkResult<List<RecipeListItem>> {
         return networkCallRunner.executeForResponse(
-            mapper = recipeListMapper.toListMapper(),
+            mapper = recipeListMapper.toAsyncListMapper(),
             request = { recipeServices.getRecipes("recipe").data })
+    }
+
+    override suspend fun getRecipeDetails(recipeId: String): NetworkResult<RecipeDetails> {
+        return networkCallRunner.executeForResponse(
+            mapper = recipeDetailMapper,
+            request = { recipeServices.getRecipeDetail(recipeId) })
     }
 }

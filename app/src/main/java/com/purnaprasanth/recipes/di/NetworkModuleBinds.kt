@@ -1,6 +1,8 @@
 package com.purnaprasanth.recipes.di
 
+import coil.ImageLoader
 import com.purnaprasanth.recipes.ContentFul
+import com.purnaprasanth.recipes.contentful.ContentFulCoilDelegate
 import com.purnaprasanth.recipes.contentful.EntryResource
 import com.purnaprasanth.recipes.contentful.IContentFulServices
 import com.purnaprasanth.recipes.contentful.OkhttpContentfulServices
@@ -9,6 +11,8 @@ import com.purnaprasanth.recipes.data.Mapper
 import com.purnaprasanth.recipes.data.datasources.recipe.ContentFulDataSource
 import com.purnaprasanth.recipes.data.datasources.recipe.IRecipeDataSource
 import com.purnaprasanth.recipes.data.mappers.ContentFulRecipeToRecipe
+import com.purnaprasanth.recipes.data.mappers.ContentFulRecipeToRecipeDetail
+import com.purnaprasanth.recipes.data.model.RecipeDetails
 import com.purnaprasanth.recipes.data.model.RecipeListItem
 import dagger.Binds
 import dagger.Module
@@ -28,5 +32,12 @@ abstract class NetworkModuleBinds {
     abstract fun providesContentFulRecipeDataSource(contentFulDataSource: ContentFulDataSource): IRecipeDataSource
 
     @Binds
-    abstract fun prvidesContentfulRecipeToRecipeMapper(contentFulRecipeToRecipe: ContentFulRecipeToRecipe): Mapper<EntryResource<Recipe>, RecipeListItem>
+    abstract fun providesContentfulRecipeToRecipeMapper(contentFulRecipeToRecipe: ContentFulRecipeToRecipe): Mapper<EntryResource<Recipe>, RecipeListItem>
+
+    @Binds
+    abstract fun provideContentFulToRecipeDetailMapper(contentFulRecipeToRecipeDetail: ContentFulRecipeToRecipeDetail): Mapper<EntryResource<Recipe>, RecipeDetails>
+
+    @Binds
+    @ContentFul
+    abstract fun providesContentFulCoil(contentFulImageLoader: ContentFulCoilDelegate): ImageLoader
 }

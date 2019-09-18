@@ -1,6 +1,7 @@
 package com.purnaprasanth.recipes.data.datasources.recipe
 
 import com.purnaprasanth.recipes.data.NetworkResult
+import com.purnaprasanth.recipes.data.model.RecipeDetails
 import com.purnaprasanth.recipes.data.model.RecipeListItem
 
 /**
@@ -8,4 +9,6 @@ import com.purnaprasanth.recipes.data.model.RecipeListItem
  **/
 interface IRecipeDataSource {
     suspend fun getListOfRecipes(): NetworkResult<List<RecipeListItem>>
+
+    suspend fun getRecipeDetails(recipeId: String): NetworkResult<RecipeDetails>
 }

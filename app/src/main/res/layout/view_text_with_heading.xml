@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="@drawable/background_recipe_item"
+                  android:elevation="@dimen/elevation"
+                  android:padding="@dimen/parent_padding">
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/title"
+                  style="?android:subtitleTextAppearance"
+                  tools:text="Tags"/>
+
+        <View android:layout_width="match_parent"
+              android:layout_height="@dimen/dividerHeight"
+              android:background="?android:dividerHorizontal"
+              android:layout_marginTop="@dimen/parent_padding_half"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/content_text"
+                  android:layout_marginTop="@dimen/parent_padding_half"
+                  style="?android:textAppearanceSmall"
+                  tools:text="Healthy, Tasty"/>
+
+    </LinearLayout>
+</layout>
