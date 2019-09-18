@@ -20,7 +20,7 @@ import javax.inject.Singleton
 class ContentFulDataSource @Inject constructor(
     private val recipeServices: IRecipeServices,
     private val networkCallRunner: NetworkCallRunner,
-    @Named(value = "contentRecipeResToRecipeMapper") private val recipeListMapper: Mapper<EntryResource<Recipe>, RecipeListItem>
+    private val recipeListMapper: Mapper<EntryResource<Recipe>, RecipeListItem>
 ) : IRecipeDataSource {
     override suspend fun getListOfRecipes(): NetworkResult<List<RecipeListItem>> {
         return networkCallRunner.executeForResponse(

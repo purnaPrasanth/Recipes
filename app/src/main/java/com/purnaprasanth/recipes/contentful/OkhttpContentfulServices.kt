@@ -5,14 +5,15 @@ import com.purnaprasanth.recipes.contentful.dataservices.IRecipeServices
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Created by Purna on 2019-09-16 as a part of Recipes
  **/
 
-class OkhttpContentfulServices(
-    okHttpClient: OkHttpClient
-) : IContentFulServices {
+@Singleton
+class OkhttpContentfulServices @Inject constructor(okHttpClient: OkHttpClient) : IContentFulServices {
 
     private val contentfulOkhttp = okHttpClient.newBuilder()
         .addInterceptor(Authrization)

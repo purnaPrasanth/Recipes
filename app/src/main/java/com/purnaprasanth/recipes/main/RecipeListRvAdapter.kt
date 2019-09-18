@@ -1,13 +1,15 @@
-package com.purnaprasanth.recipes.adapter
+package com.purnaprasanth.recipes.main
 
 import android.content.Context
 import androidx.recyclerview.widget.DiffUtil
+import coil.ImageLoader
 import coil.api.load
 import coil.transform.RoundedCornersTransformation
+import com.purnaprasanth.recipes.ContentFul
 import com.purnaprasanth.recipes.R
+import com.purnaprasanth.recipes.adapter.SingleTypeBaseRvAdapter
 import com.purnaprasanth.recipes.data.model.RecipeListItem
 import com.purnaprasanth.recipes.databinding.RecipeListItemBinding
-import com.purnaprasanth.recipes.instances.NetworkInstances
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -17,7 +19,8 @@ import javax.inject.Singleton
 
 class RecipeListRvAdapter @Inject constructor(
     context: Context,
-    recipeListItemDiffCallback: RecipeListItemDiffCallback
+    recipeListItemDiffCallback: RecipeListItemDiffCallback,
+    @ContentFul val contentFulImageLoader: ImageLoader
 ) :
     SingleTypeBaseRvAdapter<RecipeListItemBinding, RecipeListItem>(
         context,
@@ -26,7 +29,7 @@ class RecipeListRvAdapter @Inject constructor(
     ) {
     override fun onBindViewHolder(binding: RecipeListItemBinding, position: Int) {
         binding.title.text = getItem(position).title
-        binding.recipeImage.load(getItem(position).imageUrl, NetworkInstances.contentfulCoilImageLoader) {
+        binding.recipeImage.load(getItem(position).imageUrl, contentFulImageLoader) {
             transformations(RoundedCornersTransformation(4.0f))
         }
     }

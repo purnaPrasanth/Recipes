@@ -1,4 +1,4 @@
-package com.purnaprasanth.recipes.viewmodel
+package com.purnaprasanth.recipes.main
 
 import android.app.Application
 import androidx.lifecycle.LiveData
@@ -46,6 +46,10 @@ class RecipeViewModel(application: Application, appDispatchers: Dispatchers, pri
 class RecipeVMFactory(private val appDispatchers: Dispatchers, private val recipeRepo: RecipeRepo) :
     ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return RecipeViewModel(RecipeApplication.application, appDispatchers, recipeRepo) as T
+        return RecipeViewModel(
+            RecipeApplication.application,
+            appDispatchers,
+            recipeRepo
+        ) as T
     }
 }

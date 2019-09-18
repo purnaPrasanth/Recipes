@@ -1,4 +1,4 @@
-package com.purnaprasanth.recipes.activity
+package com.purnaprasanth.recipes.main
 
 import android.util.Log
 import android.view.View
@@ -7,26 +7,26 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.purnaprasanth.recipes.R
-import com.purnaprasanth.recipes.adapter.RecipeListItemDiffCallback
-import com.purnaprasanth.recipes.adapter.RecipeListRvAdapter
 import com.purnaprasanth.recipes.baseandroid.BaseActivity
+import com.purnaprasanth.recipes.data.repo.RecipeRepo
 import com.purnaprasanth.recipes.databinding.ActivityMainBinding
-import com.purnaprasanth.recipes.instances.ExecutorInstances
-import com.purnaprasanth.recipes.instances.RepoInstances
-import com.purnaprasanth.recipes.viewmodel.RecipeVMFactory
-import com.purnaprasanth.recipes.viewmodel.RecipeViewModel
+import javax.inject.Inject
 
-class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main, ExecutorInstances.appDispatchers),
+class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main),
     AdapterView.OnItemClickListener {
+
+    @Inject
+    lateinit var repo: RecipeRepo
 
     val viewModel: RecipeViewModel by lazy {
         ViewModelProviders.of(
             this,
-            RecipeVMFactory(ExecutorInstances.appDispatchers, RepoInstances.recipeRepo)
+            RecipeVMFactory(dispatchers, repo)
         ).get(RecipeViewModel::class.java)
     }
 
-    private val recipeAdapter = RecipeListRvAdapter(this, RecipeListItemDiffCallback())
+    @Inject
+    lateinit var recipeAdapter: RecipeListRvAdapter
 
     override fun initUI() {
         binding.recipeItems.adapter = recipeAdapter

@@ -6,9 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.purnaprasanth.recipes.base.Dispatchers
+import dagger.android.AndroidInjection
+import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import java.util.concurrent.CancellationException
+import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -26,17 +29,21 @@ import kotlin.coroutines.CoroutineContext
  * @property binding Binding class made available for child classes for introducing effects
  */
 
-abstract class BaseActivity<BINDING : ViewDataBinding>(@LayoutRes val layoutId: Int, protected val dispatchers: Dispatchers) :
-    AppCompatActivity(), CoroutineScope {
+abstract class BaseActivity<BINDING : ViewDataBinding>(@LayoutRes val layoutId: Int) :
+    DaggerAppCompatActivity(), CoroutineScope {
     protected lateinit var binding: BINDING
 
     private val parentJob = SupervisorJob()
+
+    @Inject
+    lateinit var dispatchers: Dispatchers
 
     override val coroutineContext: CoroutineContext
         get() = dispatchers.mainDispatcher + parentJob
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AndroidInjection.inject(this)
         binding = DataBindingUtil.setContentView(this, layoutId)
         binding.lifecycleOwner = this
         initUI()
