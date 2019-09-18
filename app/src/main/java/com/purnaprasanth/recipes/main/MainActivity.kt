@@ -5,11 +5,8 @@ import android.widget.AdapterView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import coil.ImageLoader
-import com.purnaprasanth.recipes.ContentFul
 import com.purnaprasanth.recipes.R
 import com.purnaprasanth.recipes.baseandroid.BaseActivity
-import com.purnaprasanth.recipes.data.repo.RecipeRepo
 import com.purnaprasanth.recipes.databinding.ActivityMainBinding
 import com.purnaprasanth.recipes.recipedetail.RecipeDetailActivity
 import javax.inject.Inject
@@ -17,14 +14,11 @@ import javax.inject.Inject
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main),
     AdapterView.OnItemClickListener {
 
-    @Inject
-    lateinit var repo: RecipeRepo
-
     val viewModel: RecipeViewModel by lazy {
         ViewModelProviders.of(
             this,
-            RecipeVMFactory(dispatchers, repo)
-        ).get(RecipeViewModel::class.java)
+            viewModelFactory
+        )[RecipeViewModel::class.java]
     }
 
     @Inject

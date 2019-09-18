@@ -19,7 +19,8 @@ import javax.inject.Singleton
         ActivityBuilder::class,
         NetworkModule::class,
         ExecutorsModule::class,
-        NetworkModule::class
+        NetworkModule::class,
+        ViewModelModule::class
     ]
 )
 interface AppComponent : AndroidInjector<RecipeApplication> {

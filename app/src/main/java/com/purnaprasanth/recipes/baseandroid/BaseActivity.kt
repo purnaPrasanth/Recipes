@@ -5,6 +5,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.purnaprasanth.recipes.ViewModelFactory
 import com.purnaprasanth.recipes.base.Dispatchers
 import dagger.android.AndroidInjection
 import dagger.android.support.DaggerAppCompatActivity
@@ -37,6 +38,9 @@ abstract class BaseActivity<BINDING : ViewDataBinding>(@LayoutRes val layoutId: 
 
     @Inject
     lateinit var dispatchers: Dispatchers
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
 
     override val coroutineContext: CoroutineContext
         get() = dispatchers.mainDispatcher + parentJob

@@ -10,14 +10,10 @@ import com.purnaprasanth.recipes.ContentFul
 import com.purnaprasanth.recipes.R
 import com.purnaprasanth.recipes.baseandroid.BaseActivity
 import com.purnaprasanth.recipes.contentful.ContentFulCoilDelegate
-import com.purnaprasanth.recipes.data.repo.RecipeRepo
 import com.purnaprasanth.recipes.databinding.ActivityRecipeDetailBinding
 import javax.inject.Inject
 
 class RecipeDetailActivity : BaseActivity<ActivityRecipeDetailBinding>(R.layout.activity_recipe_detail) {
-
-    @Inject
-    lateinit var repo: RecipeRepo
 
     @Inject
     @ContentFul
@@ -28,11 +24,12 @@ class RecipeDetailActivity : BaseActivity<ActivityRecipeDetailBinding>(R.layout.
     private val viewModel: RecipeDetailVM by lazy {
         ViewModelProviders.of(
             this,
-            RecipeDetailVMFactory(dispatchers, recipeId, repo)
+            viewModelFactory
         ).get(RecipeDetailVM::class.java)
     }
 
     override fun initUI() {
+        viewModel.getRecipeDetail(recipeId)
         binding.recipeDetail = viewModel.recipeDetail
         viewModel.recipeDetail.observe(this, Observer { recipeDetail ->
             binding.recipeTags.setContent(recipeDetail.tags?.joinToString(separator = ", ") { it })
