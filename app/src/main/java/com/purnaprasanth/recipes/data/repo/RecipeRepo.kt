@@ -1,5 +1,6 @@
 package com.purnaprasanth.recipes.data.repo
 
+import android.util.Log
 import com.purnaprasanth.recipes.ContentFul
 import com.purnaprasanth.recipes.data.NetworkResult
 import com.purnaprasanth.recipes.data.datasources.recipe.IRecipeDataSource
@@ -17,7 +18,10 @@ class RecipeRepo @Inject constructor(
     @ContentFul private val contentfulIRecipeDataSource: IRecipeDataSource
 ) {
     suspend fun getRecipes(): NetworkResult<List<RecipeListItem>> {
-        return contentfulIRecipeDataSource.getListOfRecipes()
+        Log.d("RecipeRepoStart", System.currentTimeMillis().toString())
+        val result = contentfulIRecipeDataSource.getListOfRecipes()
+        Log.d("RecipeRepoEnd", System.currentTimeMillis().toString())
+        return result
     }
 
     suspend fun getRecipeDetail(recipeId: String): NetworkResult<RecipeDetails> {

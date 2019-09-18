@@ -1,5 +1,8 @@
 package com.purnaprasanth.recipes.data
 
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+
 /**
  * Created by Purna on 2019-09-16 as a part of Recipes
  **/
@@ -33,8 +36,14 @@ private class MapperToListMapper<F, T>(val singleMapper: Mapper<F, T>) : Mapper<
  * @param T the type of the data to be returned
  */
 private class MapperToAsyncListMapper<F, T>(val singleMapper: Mapper<F, T>) : Mapper<List<F>, List<T>> {
-    override suspend fun map(from: List<F>): List<T> = from.map {
-        singleMapper.map(it)
+    override suspend fun map(from: List<F>): List<T> = coroutineScope {
+        val asynTasks = from.map {
+            async { singleMapper.map(it) }
+        }
+
+        return@coroutineScope asynTasks.map {
+            it.await()
+        }
     }
 }
 
