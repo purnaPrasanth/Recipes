@@ -20,6 +20,7 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
+import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import java.util.concurrent.TimeUnit
@@ -32,8 +33,7 @@ import java.util.concurrent.TimeUnit
 @Config(manifest = Config.NONE, sdk = [Build.VERSION_CODES.O_MR1])
 class RecipeVMTest {
 
-    @Rule
-    @JvmField
+    @get:Rule
     val rule = InstantTaskExecutorRule()
 
     @Mock
@@ -51,6 +51,7 @@ class RecipeVMTest {
 
     @Before
     fun before() {
+        MockitoAnnotations.initMocks(this)
         viewModel = RecipeViewModel(
             applicationMock,
             Dispatchers(
@@ -75,7 +76,7 @@ class RecipeVMTest {
 
             data
                 .test()
-                .awaitNextValue()
+                .awaitNextValue(3, TimeUnit.SECONDS)
                 .assertValue { it == recipeListItems }
         }
     }
@@ -88,7 +89,7 @@ class RecipeVMTest {
             viewModel.getRecipes()
 
             loading.test()
-                .awaitNextValue()
+                .awaitNextValue(3, TimeUnit.SECONDS)
                 .assertValue {
                     it == false
                 }
@@ -99,8 +100,8 @@ class RecipeVMTest {
     @Test
     fun getError() {
         runBlocking {
-            val exception = Exception("Error")
-            `when`(recipeRepo.getRecipes()).thenReturn(NetworkError(exception))
+            val exception = NetworkError<List<RecipeListItem>>(Exception("Error"))
+            `when`(recipeRepo.getRecipes()).thenReturn(exception)
 
             viewModel.getRecipes()
 

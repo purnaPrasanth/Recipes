@@ -19,6 +19,6 @@ class ContentFulRecipeToRecipe @Inject constructor(private val assetServices: IA
     override suspend fun map(from: EntryResource<Recipe>) = RecipeListItem(
         title = from.data.title,
         id = from.sys.id,
-        imageUrl = "https://" + assetServices.getImageAsset(from.data.photo.sys.id).data.fileDetails.url
+        imageUrl = "https:" + assetServices.getImageAsset(from.data.photo.sys.id).data.fileDetails.url
     )
 }
