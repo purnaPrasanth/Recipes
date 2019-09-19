@@ -6,6 +6,12 @@ import com.google.gson.annotations.SerializedName
  * Created by Purna on 2019-09-17 as a part of Recipes
  **/
 
+/**
+ * Data class for fetching Image Assets
+ *
+ * Knowns Usages in [AssetResource]
+ */
+
 data class ImageAsset(
     @SerializedName("file")
     val fileDetails: AssetFile,

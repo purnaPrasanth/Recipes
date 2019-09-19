@@ -6,6 +6,7 @@ import com.purnaprasanth.recipes.contentful.dataservices.IAssetServices
 import com.purnaprasanth.recipes.contentful.dataservices.IRecipeServices
 import com.purnaprasanth.recipes.data.Mapper
 import com.purnaprasanth.recipes.data.model.RecipeDetails
+import com.purnaprasanth.recipes.data.model.RecipeListItem
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import javax.inject.Inject
@@ -14,6 +15,12 @@ import javax.inject.Singleton
 /**
  * Created by Purna on 2019-09-18 as a part of Recipes
  **/
+
+/**
+ * a mapper to map [Recipe] to [RecipeListItem]
+ * @param assetsService an [IAssetServices] implementation to fetch assets from ContentFul Delivery API
+ * @param recipeServices an [IAssetServices] implementation to fetch recipe related data from ContentFul Delivery API
+ */
 
 @Singleton
 class ContentFulRecipeToRecipeDetail @Inject constructor(

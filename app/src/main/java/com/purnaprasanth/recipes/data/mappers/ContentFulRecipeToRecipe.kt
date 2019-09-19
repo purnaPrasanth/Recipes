@@ -12,6 +12,10 @@ import javax.inject.Singleton
  * Created by Purna on 2019-09-16 as a part of Recipes
  **/
 
+/**
+ * a mapper to map [Recipe] to [RecipeListItem]
+ * @param assetServices an [IAssetServices] implementation to fetch assets from ContentFul Delivery API
+ */
 @Singleton
 class ContentFulRecipeToRecipe @Inject constructor(private val assetServices: IAssetServices) :
     Mapper<EntryResource<Recipe>, RecipeListItem> {

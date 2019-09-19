@@ -13,6 +13,10 @@ import javax.inject.Singleton
  * Created by Purna on 2019-09-16 as a part of Recipes
  **/
 
+/**
+ * An OkHttp Implementation for [IContentFulServices]
+ */
+
 @Singleton
 class OkhttpContentfulServices @Inject constructor(okHttpClient: OkHttpClient) : IContentFulServices {
 

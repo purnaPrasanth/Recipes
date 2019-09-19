@@ -13,6 +13,12 @@ import retrofit2.http.Query
  * Created by Purna on 2019-09-15 as a part of Recipes
  **/
 
+/**
+ * Data Service Contract to fetch Recipe Related Entries from ContentFul Delivery API
+ *
+ * known usages [IContentFulServices]
+ */
+
 interface IRecipeServices {
 
     @GET("entries")

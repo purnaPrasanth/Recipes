@@ -2,7 +2,7 @@ package com.purnaprasanth.recipes
 
 import android.app.Activity
 import android.app.Application
-import com.facebook.stetho.Stetho
+import com.purnaprasanth.recipes.appinitializers.AppInitializers
 import com.purnaprasanth.recipes.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
@@ -17,6 +17,8 @@ class RecipeApplication : DaggerApplication(), HasAndroidInjector {
 
     @Inject
     lateinit var activityDispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
+    @Inject
+    lateinit var initializers: AppInitializers
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
         return DaggerAppComponent.factory().create(this)
@@ -25,8 +27,7 @@ class RecipeApplication : DaggerApplication(), HasAndroidInjector {
     override fun onCreate() {
         super.onCreate()
         INSTANCE = this
-
-        Stetho.initializeWithDefaults(this)
+        initializers.init(this)
     }
 
     fun activityInjector(): DispatchingAndroidInjector<Activity> {

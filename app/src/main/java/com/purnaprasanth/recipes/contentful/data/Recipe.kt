@@ -7,6 +7,12 @@ import com.purnaprasanth.recipes.contentful.LinkRes
  * Created by Purna on 2019-09-14 as a part of Recipes
  **/
 
+/**
+ * Data class for fetching Recipe Details
+ *
+ * Knowns Usages in [EntryResource]
+ */
+
 data class Recipe(
     @SerializedName("title") val title: String,
     @SerializedName("description") val description: String,

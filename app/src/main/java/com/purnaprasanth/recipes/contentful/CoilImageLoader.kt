@@ -14,6 +14,10 @@ import javax.inject.Singleton
  * Created by Purna on 2019-09-17 as a part of Recipes
  **/
 
+/**
+ * A ContentFul Delegate for fetching images using [ImageLoader]
+ */
+
 @Singleton
 class ContentFulCoilDelegate @Inject constructor(
     @App private val appContext: Context,

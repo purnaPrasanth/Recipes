@@ -8,6 +8,12 @@ import retrofit2.http.Path
 /**
  * Created by Purna on 2019-09-17 as a part of Recipes
  **/
+
+/**
+ * Data Service Contract to fetch Assets from ContentFul Delivery API
+ *
+ * known usages [IContentFulServices]
+ */
 interface IAssetServices {
 
     @GET("assets/{asset_id}")
