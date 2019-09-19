@@ -24,6 +24,23 @@ android {
         }
     }
 
+    flavorDimensions "default"
+
+    productFlavors {
+        def spaceId = "SPACE_ID"
+        def accessToken = "ACCESS_TOKEN"
+        def environment = "ENVIRONMENT"
+
+        local {
+            buildConfigField 'String', spaceId, '"kk2bw5ojx476"'
+            buildConfigField 'String', accessToken, '"7ac531648a1b5e1dab6c18b0979f822a5aad0fe5f1109829b8a197eb2be4b84c"'
+            buildConfigField 'String', environment, '"master"'
+
+            applicationIdSuffix ".local"
+            dimension "default"
+        }
+    }
+
     dataBinding {
         enabled true
     }

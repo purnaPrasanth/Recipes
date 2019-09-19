@@ -28,7 +28,6 @@ private class MapperToListMapper<F, T>(val singleMapper: Mapper<F, T>) : Mapper<
     override suspend fun map(from: List<F>): List<T> = from.map { singleMapper.map(it) }
 }
 
-// TODO() implement async processing for each item
 /**
  * Base Mapper for a list of items of one type to a different type with Async Processing for each item
  *

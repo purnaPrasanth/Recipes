@@ -1,5 +1,6 @@
 package com.purnaprasanth.recipes.contentful
 
+import com.purnaprasanth.recipes.BuildConfig
 import com.purnaprasanth.recipes.contentful.dataservices.IAssetServices
 import com.purnaprasanth.recipes.contentful.dataservices.IRecipeServices
 import okhttp3.OkHttpClient
@@ -19,9 +20,8 @@ class OkhttpContentfulServices @Inject constructor(okHttpClient: OkHttpClient) :
         .addInterceptor(Authrization)
         .build()
 
-    // todo; space_id, environment from product_flavours
     private val retrofit = Retrofit.Builder()
-        .baseUrl("https://cdn.contentful.com/spaces/kk2bw5ojx476/environments/master/")
+        .baseUrl("https://cdn.contentful.com/spaces/${BuildConfig.SPACE_ID}/environments/${BuildConfig.ENVIRONMENT}/")
         .addConverterFactory(GsonConverterFactory.create())
         .client(contentfulOkhttp)
         .build()

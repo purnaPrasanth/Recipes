@@ -24,19 +24,31 @@ class RecipeDetailVM @Inject constructor(
 
     private val _recipeDetail = MutableLiveData<RecipeDetails>()
 
+    private val _loading = MutableLiveData<Boolean>()
+
+    private val _error = MutableLiveData<NetworkError<*>>()
+
     val recipeDetail: LiveData<RecipeDetails>
         get() = _recipeDetail
 
+    val loading: LiveData<Boolean>
+        get() = _loading
+
+    val error: LiveData<NetworkError<*>>
+        get() = _error
+
     fun getRecipeDetail(recipeId: String) {
+        _loading.postValue(true)
         launch {
             when (val result = recipeRepo.getRecipeDetail(recipeId)) {
                 is NetworkSuccess -> {
                     _recipeDetail.postValue(result.data)
                 }
                 is NetworkError -> {
-
+                    _error.postValue(result)
                 }
             }
+            _loading.postValue(false)
         }
     }
 }

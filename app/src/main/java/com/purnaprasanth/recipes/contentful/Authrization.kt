@@ -1,5 +1,6 @@
 package com.purnaprasanth.recipes.contentful
 
+import com.purnaprasanth.recipes.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -11,8 +12,7 @@ object Authrization : Interceptor {
         val requestBuilder = chain.request().newBuilder()
 
         val newRequest = requestBuilder.apply {
-            // TODO, take from build script
-            addHeader("Authorization", "Bearer 7ac531648a1b5e1dab6c18b0979f822a5aad0fe5f1109829b8a197eb2be4b84c")
+            addHeader("Authorization", "Bearer ${BuildConfig.ACCESS_TOKEN}")
         }.build()
 
         return chain.proceed(newRequest)

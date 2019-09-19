@@ -29,11 +29,20 @@ class RecipeViewModel @Inject constructor(
 
     private val _networkError = MutableLiveData<NetworkError<*>>()
 
+    private val _loading = MutableLiveData<Boolean>()
+
+    val error: LiveData<NetworkError<*>>
+        get() = _networkError
+
+    val loading: LiveData<Boolean>
+        get() = _loading
+
     init {
         launch(appDispatchers.ioDispatcher) { getRecipes() }
     }
 
     private suspend fun getRecipes() {
+        _loading.postValue(true)
         when (val result = recipeRepo.getRecipes()) {
             is NetworkSuccess -> {
                 _recipeList.postValue(result.data)
@@ -42,5 +51,6 @@ class RecipeViewModel @Inject constructor(
                 _networkError.postValue(result)
             }
         }
+        _loading.postValue(false)
     }
 }
