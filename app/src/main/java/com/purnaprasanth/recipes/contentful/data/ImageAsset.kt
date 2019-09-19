@@ -8,12 +8,12 @@ import com.google.gson.annotations.SerializedName
 
 data class ImageAsset(
     @SerializedName("file")
-    val fileDetails: File,
+    val fileDetails: AssetFile,
     @SerializedName("title")
     val title: String
 )
 
-data class File(
+data class AssetFile(
     @SerializedName("contentType")
     val contentType: String,
     @SerializedName("details")

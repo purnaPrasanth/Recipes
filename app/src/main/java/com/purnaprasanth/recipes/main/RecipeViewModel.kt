@@ -37,20 +37,18 @@ class RecipeViewModel @Inject constructor(
     val loading: LiveData<Boolean>
         get() = _loading
 
-    init {
-        launch(appDispatchers.ioDispatcher) { getRecipes() }
-    }
-
-    private suspend fun getRecipes() {
+    fun getRecipes() {
         _loading.postValue(true)
-        when (val result = recipeRepo.getRecipes()) {
-            is NetworkSuccess -> {
-                _recipeList.postValue(result.data)
+        launch {
+            when (val result = recipeRepo.getRecipes()) {
+                is NetworkSuccess -> {
+                    _recipeList.postValue(result.data)
+                }
+                is NetworkError -> {
+                    _networkError.postValue(result)
+                }
             }
-            is NetworkError -> {
-                _networkError.postValue(result)
-            }
+            _loading.postValue(false)
         }
-        _loading.postValue(false)
     }
 }

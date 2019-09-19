@@ -15,7 +15,7 @@ abstract class IdeableResSys : BaseResSys() {
 }
 
 abstract class SpaceResSys : IdeableResSys() {
-    abstract val spaceResSys: LinkRes
+    abstract val spaceRes: LinkRes
 }
 
 abstract class ContentResSys : SpaceResSys() {
@@ -33,9 +33,14 @@ data class LinkResSys(
 ) : IdeableResSys()
 
 data class EntryResSys(
-    @SerializedName("type") override val type: String,
-    @SerializedName("linkType") val linkType: String,
+    @SerializedName("type") override val type: String = "Entry",
     @SerializedName("id") override val id: String,
     @SerializedName("contentType") override val contentType: LinkRes,
-    @SerializedName("space") override val spaceResSys: LinkRes
+    @SerializedName("space") override val spaceRes: LinkRes
 ) : ContentResSys()
+
+data class AssetResSys(
+    @SerializedName("type") override val type: String = "Asset",
+    @SerializedName("id") override val id: String,
+    @SerializedName("space") override val spaceRes: LinkRes
+) : SpaceResSys()

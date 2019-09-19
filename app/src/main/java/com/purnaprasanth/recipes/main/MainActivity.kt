@@ -26,6 +26,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main),
     lateinit var recipeAdapter: RecipeListRvAdapter
 
     override fun initUI() {
+        viewModel.getRecipes()
         binding.recipeItems.adapter = recipeAdapter
         binding.recipeItems.layoutManager = LinearLayoutManager(this)
         recipeAdapter.onItemClickListener = this

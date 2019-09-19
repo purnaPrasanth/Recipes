@@ -12,6 +12,6 @@ data class Recipe(
     @SerializedName("description") val description: String,
     @SerializedName("photo") val photo: LinkRes,
     @SerializedName("calories") val calories: Int,
-    @SerializedName("chef") val chef: LinkRes?,
-    @SerializedName("tags") val tags: List<LinkRes>?
+    @SerializedName("chef") val chef: LinkRes? = null,
+    @SerializedName("tags") val tags: List<LinkRes>? = null
 )
